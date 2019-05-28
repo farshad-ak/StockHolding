@@ -2,6 +2,8 @@ package com.commercetools.farshad.stockhandling.product;
 
 import com.commercetools.farshad.stockhandling.sell.Sale;
 import com.commercetools.farshad.stockhandling.stock.Stock;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -18,8 +20,7 @@ import java.util.List;
 @Entity
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private String id;
     private String name;
     private String description;
     private Double pricePerUnit;
@@ -29,11 +30,11 @@ public class Product {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Sale> sales = new ArrayList<>();
 
+    @JsonIgnore
     @OneToOne(
             mappedBy = "product",
             cascade = CascadeType.ALL,
-            orphanRemoval = true,
-            fetch = FetchType.LAZY
-    )
+            orphanRemoval = true
+              )
     private Stock stock;
 }
