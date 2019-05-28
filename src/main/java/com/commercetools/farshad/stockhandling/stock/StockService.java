@@ -9,16 +9,5 @@ public interface StockService {
 
     Stock save(Stock stock);
 
-    Optional<Stock> find(Long id);
-
-    Iterable<Stock> findAll();
-
-    void delete(Long id);
-
-    void delete(Stock stock);
-
-    void deleteAll();
-
-    long count();
-
+    Stock saveForUpdate(StockModel stockModel);
 }

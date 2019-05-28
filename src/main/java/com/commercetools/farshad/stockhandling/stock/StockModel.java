@@ -14,21 +14,9 @@ import java.util.Date;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
-public class Stock {
-    @Id
-   private String id;
-
-
-    private Date lastUpdateStock;
-
-
-    @OneToOne()
-    @JoinColumn(name = "product_id")
-    private Product product;
-
+public class StockModel {
+    private String id;
+    private Date timestamp;
+    private String productId;
     private Integer quantity;
-
-    @Version
-    private Long version;
 }
