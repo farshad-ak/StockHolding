@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -16,16 +17,18 @@ import java.sql.Timestamp;
 @Entity
 public class Stock {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+   private String id;
 
 
-    private Timestamp lastUpdateStock;
+    private Date lastUpdateStock;
 
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne()
     @JoinColumn(name = "product_id")
     private Product product;
 
     private Integer quantity;
+
+    @Version
+    private Long version;
 }
