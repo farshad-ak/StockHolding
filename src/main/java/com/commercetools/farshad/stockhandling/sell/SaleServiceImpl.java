@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -14,7 +15,7 @@ public class SaleServiceImpl implements SaleService {
     private SaleRepository saleRepository;
 
     @Override
-    public List<TopSellingProductsModel> findTop3SellingProduct() {
-        return saleRepository.findTopXSellingProduct(PageRequest.of(0, 3));
+    public List<TopSellingProductsModel> findTop3SellingProduct(LocalDateTime startDate, LocalDateTime endDate) {
+        return saleRepository.findTopXSellingProduct(startDate, endDate, PageRequest.of(0, 3));
     }
 }

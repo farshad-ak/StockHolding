@@ -2,13 +2,15 @@ package com.commercetools.farshad.stockhandling.stock;
 
 import com.commercetools.farshad.stockhandling.product.Product;
 import com.commercetools.farshad.stockhandling.product.ProductRepository;
-import com.commercetools.farshad.stockhandling.stock.Stock;
-import com.commercetools.farshad.stockhandling.stock.StockRepository;
+import com.commercetools.farshad.stockhandling.sell.SaleService;
+import com.commercetools.farshad.stockhandling.sell.TopSellingProductsModel;
+import com.commercetools.farshad.stockhandling.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
-import java.util.Calendar;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +23,9 @@ public class StockServiceImpl implements StockService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private SaleService saleService;
 
     @Override
     public Stock save(Stock stock) {
@@ -63,5 +68,38 @@ public class StockServiceImpl implements StockService {
         }
         return productStockModel;
     }
+
+    @Override
+    public ProductStatModel findStats(String time) {
+        ProductStatModel productStat = new ProductStatModel();
+        productStat.setRange(time);
+        productStat.setRequestTimestamp(LocalDateTime.now());
+//--------------------------
+        LocalDateTime startDate = LocalDateTime.now();
+        LocalDateTime endDate = LocalDateTime.now();
+        if ("lastMonth".equalsIgnoreCase(time)) {
+            startDate = DateUtil.getPreviousMonth()[0];
+            endDate = DateUtil.getPreviousMonth()[1];
+        } else if ("today".equalsIgnoreCase(time)) {
+            startDate = DateUtil.getTodayStartAndNow()[0];
+            endDate = DateUtil.getTodayStartAndNow()[1];
+        }
+
+
+//--------------------------
+        List<TopSellingProductsModel> top3SellingProduct = saleService.findTop3SellingProduct(startDate, endDate);
+//--------------------------
+        List<Stock> topXAvailableProduct = stockRepository.findAllByAndLastUpdateStockGreaterThanEqualAndLastUpdateStockLessThanEqualOrderByQuantityDesc(
+                startDate, endDate, PageRequest.of(0, 3));
+        List<StockModel> top3AvailableProduct = new ArrayList<>();
+        topXAvailableProduct.forEach(stock -> {
+            top3AvailableProduct.add(new StockModel(stock.getId(), stock.getLastUpdateStock(), stock.getProduct().getId(), stock.getQuantity()));
+        });
+//--------------------------
+        productStat.setTopAvailableProducts(top3AvailableProduct);
+        productStat.setTopSellingProducts(top3SellingProduct);
+        return productStat;
+    }
+
 
 }
