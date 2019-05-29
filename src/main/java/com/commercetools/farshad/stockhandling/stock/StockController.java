@@ -27,7 +27,19 @@ public class StockController {
             return res;
         } catch (Exception ex) {
             throw new ResponseStatusException(
-                    HttpStatus.INTERNAL_SERVER_ERROR, "outdated stock, because a newer stock was processed first", ex);
+                    HttpStatus.NO_CONTENT, "outdated stock, because a newer stock was processed first", ex);
+        }
+    }
+
+    @GetMapping("/stock")
+    public ResponseEntity<ProductStockModel> getProductInStock(@RequestParam("productId") String productId) {
+        try {
+            ProductStockModel productInStock = stockService.getProductInStock(productId);
+            ResponseEntity<ProductStockModel> res = new ResponseEntity<>(productInStock, HttpStatus.ACCEPTED);
+            return res;
+        } catch (Exception ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.INTERNAL_SERVER_ERROR, "INTERNAL_SERVER_ERROR", ex);
         }
     }
 
