@@ -1,7 +1,6 @@
 package com.commercetools.farshad.stockhandling.stock;
 
 import com.commercetools.farshad.stockhandling.product.Product;
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -10,8 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,7 +21,7 @@ public class Stock {
    private String id;
 
     @JsonProperty("timestamp")
-    private Date lastUpdateStock;
+    private LocalDateTime lastUpdateStock;
 
     @JsonIgnore
     @OneToOne()
