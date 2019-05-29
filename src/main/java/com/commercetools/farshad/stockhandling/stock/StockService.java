@@ -10,4 +10,6 @@ public interface StockService {
     Stock save(Stock stock);
 
     Stock saveForUpdate(StockModel stockModel);
+
+    ProductStockModel getProductInStock(String productId);
 }

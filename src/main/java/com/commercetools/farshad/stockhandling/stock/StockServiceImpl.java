@@ -52,4 +52,16 @@ public class StockServiceImpl implements StockService {
         return saved;
     }
 
+    @Override
+    public ProductStockModel getProductInStock(String productId) {
+        Optional<Stock> productInStockByProductId = stockRepository.findAllByProductId(productId);
+        ProductStockModel productStockModel = new ProductStockModel();
+        if (productInStockByProductId.isPresent()) {
+            productStockModel.setProductId(productInStockByProductId.get().getProduct().getId());
+            productStockModel.setRequestTimestamp(new Date());
+            productStockModel.setStock(productInStockByProductId.get());
+        }
+        return productStockModel;
+    }
+
 }
