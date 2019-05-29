@@ -9,7 +9,8 @@ services:
     ports:
       - 3306:3306
   stock-handling-api:
-    build: . -t stock-handling-api:latest
+    build: .
+    image: stock-handling-api:latest
     depends_on:
       - docker-mysql
     ports:
