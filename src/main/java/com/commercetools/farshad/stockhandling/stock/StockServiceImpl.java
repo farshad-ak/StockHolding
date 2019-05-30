@@ -27,11 +27,21 @@ public class StockServiceImpl implements StockService {
     @Autowired
     private SaleService saleService;
 
+    /**
+     * @param stock Stock Entity
+     * @return
+     * @inheritDoc
+     */
     @Override
     public Stock save(Stock stock) {
         return stockRepository.save(stock);
     }
 
+    /**
+     * @param stockModel Stock Model
+     * @return
+     * @inheritDoc
+     */
     @Override
     public Stock saveForUpdate(StockModel stockModel) {
         Stock saved = new Stock();
@@ -57,6 +67,11 @@ public class StockServiceImpl implements StockService {
         return saved;
     }
 
+    /**
+     * @param productId Product Id
+     * @return
+     * @inheritDoc
+     */
     @Override
     public ProductStockModel getProductInStock(String productId) {
         Optional<Stock> productInStockByProductId = stockRepository.findAllByProductId(productId);
@@ -69,6 +84,11 @@ public class StockServiceImpl implements StockService {
         return productStockModel;
     }
 
+    /**
+     * @param time today or Last month
+     * @return
+     * @inheritDoc
+     */
     @Override
     public ProductStatModel findStats(String time) {
         ProductStatModel productStat = new ProductStatModel();

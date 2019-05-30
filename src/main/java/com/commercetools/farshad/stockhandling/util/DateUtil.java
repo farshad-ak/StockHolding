@@ -5,9 +5,18 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneId;
 
+/**
+ * Date Util Class
+ *
+ * @author Farshad Akbari
+ */
 public class DateUtil {
 
-
+    /**
+     * Get Previous Month
+     *
+     * @return array of previous month- element 0 is start date and element 1 is end date
+     */
     public static LocalDateTime[] getPreviousMonth() {
         LocalTime midnight = LocalTime.MIDNIGHT;
         LocalDate today = LocalDate.now(ZoneId.of("Europe/Berlin"));
@@ -18,6 +27,11 @@ public class DateUtil {
         return new LocalDateTime[]{from, to};
     }
 
+    /**
+     * Get today start and end date
+     *
+     * @return array of today start and end date - element 0 is midnight of today and element 1 is end date
+     */
     public static LocalDateTime[] getTodayStartAndNow() {
         LocalTime midnight = LocalTime.MIDNIGHT;
         LocalDate today = LocalDate.now(ZoneId.of("Europe/Berlin"));

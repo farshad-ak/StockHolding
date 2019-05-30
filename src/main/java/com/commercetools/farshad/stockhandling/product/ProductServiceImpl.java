@@ -12,6 +12,12 @@ public class ProductServiceImpl implements ProductService {
     private ProductRepository productRepository;
 
 
+    /**
+     * Find a product with string ID
+     *
+     * @param productId porduct ID
+     * @return Optional object of Product
+     */
     @Override
     public Optional<Product> findById(String productId) {
         return productRepository.findById(productId);

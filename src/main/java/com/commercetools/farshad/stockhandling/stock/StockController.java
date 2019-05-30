@@ -24,6 +24,13 @@ public class StockController {
     @Autowired
     private SaleService saleService;
 
+
+    /**
+     * This endpoint updates the current stock of a particular product
+     *
+     * @param stock Stock Object
+     * @return ResponseEntity<Stock>
+     */
     @PostMapping("/updateStock")
     public ResponseEntity<Stock> save(@RequestBody StockModel stock) {
         try {
@@ -42,6 +49,13 @@ public class StockController {
         }
     }
 
+    /**
+     * you get the current stock available of a particular
+     * product
+     *
+     * @param productId particular product
+     * @return ProductStockModel
+     */
     @GetMapping("/stock")
     public ResponseEntity<ProductStockModel> getProductInStock(@RequestParam("productId") String productId) {
         try {
@@ -56,6 +70,14 @@ public class StockController {
         }
     }
 
+
+    /**
+     * When calling this endpoint, we want to receive some statistics about our stocks back. The
+     * available timespans are today (midnight until now) and last month.
+     *
+     * @param time today (midnight until now) and last month.
+     * @return top selling and top available product in stock
+     */
     @GetMapping("/statistics")
     public ResponseEntity<ProductStatModel> getStockStatistic(@RequestParam("time") String time) {
         try {
