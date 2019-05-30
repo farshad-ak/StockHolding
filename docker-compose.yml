@@ -1,21 +1,26 @@
-version: '3'
+version: "3"
 
 services:
-  docker-mysql:
-    image: mysql/mysql-server
-    environment:
-      - MYSQL_ROOT_PASSWORD=changeit
-    ports:
-      - 3306:3306
   stock-handling-api:
     build: .
+    image: stock-handling-api:latest
     depends_on:
       - docker-mysql
     ports:
       - 8432:8432
+    restart: always
+    networks:
+      - app_net
+  docker-mysql:
+    container_name: mysql-db
+    image: mysql/mysql-server
     environment:
-      - DATABASE_HOST=docker-mysql
-      - DATABASE_USER=root
-      - DATABASE_PASSWORD=changeit
-      - DATABASE_NAME=stockdb
-      - DATABASE_PORT=3306
+      - MYSQL_ROOT_PASSWORD=changeit
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - 3306:3306
+    networks:
+      - app_net
+networks:
+    app_net:
+        driver: "bridge"
