@@ -1,7 +1,7 @@
 package com.commercetools.farshad.stockhandling.stock;
 
 import com.commercetools.farshad.stockhandling.product.Product;
-import com.commercetools.farshad.stockhandling.product.ProductRepository;
+import com.commercetools.farshad.stockhandling.product.ProductService;
 import com.commercetools.farshad.stockhandling.sell.SaleService;
 import com.commercetools.farshad.stockhandling.sell.TopSellingProductsModel;
 import com.commercetools.farshad.stockhandling.util.DateUtil;
@@ -22,7 +22,7 @@ public class StockServiceImpl implements StockService {
     private StockRepository stockRepository;
 
     @Autowired
-    private ProductRepository productRepository;
+    private ProductService productService;
 
     @Autowired
     private SaleService saleService;
@@ -41,7 +41,7 @@ public class StockServiceImpl implements StockService {
             productStock = byProductId.get();
             productStock.setLastUpdateStock(stockModel.getTimestamp());
         } else {
-            Optional<Product> product = productRepository.findById(stockModel.getProductId());
+            Optional<Product> product = productService.findById(stockModel.getProductId());
             if (product.isPresent()) {
                 productStock = new Stock();
                 productStock.setLastUpdateStock(stockModel.getTimestamp());
