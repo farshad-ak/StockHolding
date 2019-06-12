@@ -2,6 +2,9 @@ package com.commercetools.farshad.stockhandling.stock;
 
 
 import com.commercetools.farshad.stockhandling.sell.SaleService;
+import com.commercetools.farshad.stockhandling.stock.dto.ProductStatModel;
+import com.commercetools.farshad.stockhandling.stock.dto.ProductStockModel;
+import com.commercetools.farshad.stockhandling.stock.dto.StockModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,7 @@
 package com.commercetools.farshad.stockhandling.sell;
 
+import com.commercetools.farshad.stockhandling.sell.dto.TopSellingProductsModel;
+
 import java.time.LocalDateTime;
 import java.util.List;
 

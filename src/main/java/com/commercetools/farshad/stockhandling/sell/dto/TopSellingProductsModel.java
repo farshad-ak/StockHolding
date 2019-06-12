@@ -1,4 +1,4 @@
-package com.commercetools.farshad.stockhandling.sell;
+package com.commercetools.farshad.stockhandling.sell.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

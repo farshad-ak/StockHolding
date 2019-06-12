@@ -1,5 +1,9 @@
 package com.commercetools.farshad.stockhandling.stock;
 
+import com.commercetools.farshad.stockhandling.stock.dto.ProductStatModel;
+import com.commercetools.farshad.stockhandling.stock.dto.ProductStockModel;
+import com.commercetools.farshad.stockhandling.stock.dto.StockModel;
+
 public interface StockService {
 
     /**

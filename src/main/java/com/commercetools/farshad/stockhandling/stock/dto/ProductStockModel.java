@@ -1,5 +1,6 @@
-package com.commercetools.farshad.stockhandling.stock;
+package com.commercetools.farshad.stockhandling.stock.dto;
 
+import com.commercetools.farshad.stockhandling.stock.Stock;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

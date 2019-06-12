@@ -1,5 +1,6 @@
 package com.commercetools.farshad.stockhandling.sell;
 
+import com.commercetools.farshad.stockhandling.sell.dto.TopSellingProductsModel;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -18,7 +19,7 @@ public interface SaleRepository extends CrudRepository<Sale, Long> {
      * @param pageable  limitation for finding
      * @return it's returning a list of TopSellingProductsModel Object
      */
-    @Query(value = "select new com.commercetools.farshad.stockhandling.sell.TopSellingProductsModel(ss.product.id,sum(ss.countOfItem)) " +
+    @Query(value = "select new com.commercetools.farshad.stockhandling.sell.dto.TopSellingProductsModel(ss.product.id,sum(ss.countOfItem)) " +
             " from Sale ss " +
             "where  ss.saleDate >= :startDate" +
             " and ss.saleDate <= :endDate " +

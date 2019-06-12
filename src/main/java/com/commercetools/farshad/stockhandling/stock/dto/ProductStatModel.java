@@ -1,6 +1,6 @@
-package com.commercetools.farshad.stockhandling.stock;
+package com.commercetools.farshad.stockhandling.stock.dto;
 
-import com.commercetools.farshad.stockhandling.sell.TopSellingProductsModel;
+import com.commercetools.farshad.stockhandling.sell.dto.TopSellingProductsModel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
